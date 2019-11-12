@@ -6,7 +6,7 @@ version = '1.0'
 setup(name='cms.policy',
       version=version,
       description="Chinese medical science AI system policy.",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.md").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
@@ -27,12 +27,13 @@ setup(name='cms.policy',
           'setuptools',
           # -*- Extra requirements: -*-
       ],
+      extras_require={
+    'test': ['plone.app.testing',]
+        },       
       entry_points="""
       # -*- Entry points: -*-
 
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      setup_requires=["PasteScript"],
-      paster_plugins=["ZopeSkel"],
       )
