@@ -25,6 +25,7 @@ setup(name='cms.policy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'collective.autopermission',          
           # -*- Extra requirements: -*-
       ],
       extras_require={
