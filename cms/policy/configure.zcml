@@ -5,9 +5,10 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="cms.policy">
 
-  <five:registerPackage package="." initialize=".initialize" />
+   <includeDependencies package="." />
+   <include file="permissions.zcml" />   
+   <include package=".browser" />
 
-  <include file="permissions.zcml" />
   <genericsetup:registerProfile
       name="default"
       title="cms.policy"
