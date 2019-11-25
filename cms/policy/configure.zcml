@@ -6,10 +6,19 @@
     i18n_domain="cms.policy">
 
    <includeDependencies package="." />
-   <include file="permissions.zcml" />   
+   <include file="permissions.zcml" />
+   <include package=".patch" />      
    <include package=".browser" />
-
-  <genericsetup:registerProfile
+   
+   <genericsetup:importStep
+        name="emc.policy-postInstall"
+        title="emc.policy post_install import step"
+        description="Post install import step from emc.policy"
+        handler=".setuphandlers.post_install">
+        <depends name='typeinfo' />
+   </genericsetup:importStep>
+   
+   <genericsetup:registerProfile
       name="default"
       title="cms.policy"
       directory="profiles/default"
