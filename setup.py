@@ -25,6 +25,8 @@ setup(name='cms.policy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.CMFPlone',
+          'collective.monkeypatcher',          
           'collective.autopermission',          
           # -*- Extra requirements: -*-
       ],
