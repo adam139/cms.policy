@@ -10,10 +10,8 @@ from zope import event
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
 
-from cms.db import  Session
-from cms.db.orm import YaoWei,YaoXing,JingLuo,Yao
-from cms.db.orm import ChuFang,BingRen,DiZhi,DanWei,YiSheng
-from cms.db.orm import Yao_ChuFang_Asso,ChuFang_BingRen_Asso
+
+from cms.db.tests.base import inputvalues
 
 logger = getLogger(__name__)
 
@@ -38,53 +36,7 @@ STRUCTURE = [
 }
 ]
 
-def initdb(context):
-        "enter initial recorders to db"
 
-        yaowei1 = YaoWei("酸")
-        yaowei2 = YaoWei("苦")
-        yaowei3 = YaoWei("甘")
-        yaowei4 = YaoWei("辛")
-        yaowei5 = YaoWei("咸")
-        Session.add_all([yaowei1,yaowei2,yaowei3,yaowei4,yaowei5])
-        yaoxing1 = YaoXing("大热")
-        yaoxing2 = YaoXing("热")
-        yaoxing3 = YaoXing("温")
-        yaoxing4 = YaoXing("凉")
-        yaoxing5 = YaoXing("寒")
-        yaoxing6 = YaoXing("大寒")
-        Session.add_all([yaoxing1,yaoxing2,yaoxing3,yaoxing4,yaoxing5,yaoxing6])
-        jingluo1 = JingLuo("足太阳膀胱经")
-        jingluo2 = JingLuo("足阳明胃经")
-        jingluo3 = JingLuo("足少阳胆经")
-        jingluo4 = JingLuo("足厥阴肝经")
-        jingluo5 = JingLuo("足少阴肾经")
-        jingluo6 = JingLuo("足太阴脾经")
-        Session.add_all([jingluo1,jingluo2,jingluo3,jingluo4,jingluo5,jingluo6])
-        yao1 = Yao("白芍")
-        yao1.yaowei = yaowei1
-        yao1.yaoxing = yaoxing1
-        yao1.guijing = [jingluo1]         
-        yao2 = Yao("大枣")
-        yao2.yaowei = yaowei2
-        yao2.yaoxing = yaoxing2
-        yao2.guijing = [jingluo2]
-        Session.add_all([yao1,yao2])        
-        dizhi = DiZhi("中国","湖南","湘潭市","湘潭县云湖桥镇北岸村道林组83号")
-        bingren = BingRen('张三',1, date(2015, 4, 2),'13673265899')
-        bingren.dizhi = dizhi
-        dizhi2 = DiZhi("中国","湖北","十堰市","茅箭区施洋路83号")
-        danwei = DanWei("任之堂")
-        yisheng = YiSheng('余浩',1, date(2015, 4, 2),'13673265859')
-        danwei.yishengs = [yisheng]
-        danwei.dizhi = dizhi2
-        chufang = ChuFang("桂枝汤","加热稀粥",5)
-        yao_chufang = Yao_ChuFang_Asso(yao1,chufang,7,"晒干")
-        yao_chufang2 = Yao_ChuFang_Asso(yao2,chufang,10,"掰开")
-        chufang_bingren = ChuFang_BingRen_Asso(bingren,chufang,datetime.now())
-        yisheng.chufangs = [chufang]
-        Session.add_all([dizhi,bingren,danwei,dizhi2,yisheng,chufang,yao_chufang,yao_chufang2,chufang_bingren])                         
-        Session.commit()
 
 def isNotCurrentProfile(context):
     return context.readDataFile('policy_marker.txt') is None
@@ -178,9 +130,8 @@ def post_install(context):
    
     for item in STRUCTURE:
         _create_content(item, portal)
-        
-    # initial db
-    initdb(context) 
+
+    inputvalues() 
 
 #     setupGroups(context)    
 
