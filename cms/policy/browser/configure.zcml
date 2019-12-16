@@ -6,16 +6,6 @@
     xmlns:plone="http://namespaces.plone.org/plone"    
     i18n_domain="plone">
 
-  	<permission
-      	id="emc.controlpanel.adduser"
-      	title="EMC Site Setup: AddUser">
-    	<role name="SysAdmin"/>
-  	</permission>
-  	<permission
-      	id="emc.controlpanel.modifyuser"
-      	title="EMC Site Setup: ModifyUser">
-    	<role name="SecStaff"/>
-  	</permission>
   	
  	<browser:resourceDirectory
   		name="cms.policy"
@@ -23,7 +13,7 @@
 
    <!-- Overview Control Panel Overview -->
 
-   
+<!--   
    <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="index.html"
@@ -40,7 +30,7 @@
  	  layer="cms.theme.interfaces.IThemeSpecific"       
       permission="zope.Public"
       />      
-  
+  -->
 
 	<!-- manage tools-->      
    <browser:page
@@ -58,16 +48,7 @@
       permission="cmf.ManagePortal"
       />      
             
-  <browser:page
-    for="Products.CMFCore.interfaces._content.IFolderish"
-    class="plone.app.content.browser.contents.FolderContentsView"
-    name="folder_contents"
- 	layer="cms.theme.interfaces.IThemeSpecific"     
-    template="templates/folder_contents.pt"
-    permission="cmf.ListFolderContents"
-    menu="plone_displayviews"
-    title="Folder view"
-    />
+
 
   <browser:page
       for="*"
@@ -118,11 +99,12 @@
  		layer="cms.theme.interfaces.IThemeSpecific" 
         permission="zope2.View"
         />
-
+<!--
  	<include package="z3c.jbot" file="meta.zcml" />
 
 	<browser:jbot
     	directory="override"
     	layer="cms.theme.interfaces.IThemeSpecific"  />
-	<include zcml:condition="installed plone.scale" file="scaling.zcml" />            
+	<include zcml:condition="installed plone.scale" file="scaling.zcml" />
+	-->            
 </configure>

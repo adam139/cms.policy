@@ -10,6 +10,10 @@
 		title="cms.policy:Add cms"
         />
 	<permission
+       id="cms.policy.set_system"
+		title="cms.policy:Set system"
+        />        
+	<permission
        id="cms.policy.add_danwei"
 		title="cms.policy:Add Dan Wei"
         />
@@ -20,7 +24,12 @@
 	<permission
        id="cms.policy.add_yao"
 		title="cms.policy:Add Yao"
-        />	
+        />
+	<permission
+       id="cms.policy.edit_yao"
+		title="cms.policy:Modify yao"
+        />
+                	
   <permission
       id="cms.db.view_db"
       title="cms.db:View db"

@@ -11,7 +11,7 @@ from z3c.relationfield import RelationValue
 from zope.component import getUtility
 
 
-from cms.db.tests.base import inputvalues
+from cms.db.tests.base import inputvalues, fire_created_event
 
 logger = getLogger(__name__)
 
@@ -25,12 +25,48 @@ STRUCTURE = [
         'layout': 'folder_contents',
         'children': [
                      {
-            'type': 'cms.db.ormfolder',
-            'title': u'数据库',
-            'id': 'ormfolder',
-            'description': u'数据库',
-            'layout': 'folder_contents'
-            }                          
+                      'type': 'cms.db.ormfolder',
+                      'title': u'数据库',
+                      'id': 'ormfolder',
+                      'description': u'数据库',
+                      'layout': 'yaoxing_listings',
+                     },
+
+                     {
+                     'type': 'cms.db.yaofolder',
+                     'title': u'药',
+                     'id': 'yaofolder',
+                     'description': u'药',
+                     'layout': 'sysajax_listings',            
+                      },                          
+                     {
+                     'type': 'cms.db.danweifolder',
+                     'title': u'单位',
+                     'id': 'danweifolder',
+                     'description': u'单位',
+                     'layout': 'sysajax_listings',            
+                      },
+                     {
+                     'type': 'cms.db.yishengfolder',
+                     'title': u'医生',
+                     'id': 'yishengfolder',
+                     'description': u'医生',
+                     'layout': 'sysajax_listings',            
+                      },
+                     {
+                     'type': 'cms.db.bingrenfolder',
+                     'title': u'病人',
+                     'id': 'bingrenfolder',
+                     'description': u'病人',
+                     'layout': 'sysajax_listings',            
+                      },
+                     {
+                     'type': 'cms.db.chufangfolder',
+                     'title': u'处方',
+                     'id': 'chufangfolder',
+                     'description': u'处方',
+                     'layout': 'sysajax_listings',            
+                      },                                                                                                
 
                 ]
 }
@@ -131,7 +167,8 @@ def post_install(context):
     for item in STRUCTURE:
         _create_content(item, portal)
 
-    inputvalues() 
+    inputvalues()
+    fire_created_event() 
 
 #     setupGroups(context)    
 

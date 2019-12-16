@@ -14,12 +14,12 @@
     permission="zope2.View"
     />
   <browser:page
-      name="image_view2"
+      name="image_view3"
       for="plone.app.contenttypes.interfaces.IImage"
       template="templates/image.pt"
       layer="cms.theme.interfaces.IThemeSpecific"
       permission="zope2.View"
       menu="plone_displayviews"
-      title="View Image2"
+      title="View Image3"
       />
 </configure>

@@ -18,12 +18,13 @@
 	<role name="Manager"/>
 	<role name="Member"/>		
 	<role name="Site Administrator"/>	
-	
     </permission>
+   
 	<permission name="cms.db:View db" acquire="True">
 		<role name="Member"/>	
-    </permission>       
-	<permission name="cms.db:View log" acquire="True">
+    </permission>
+               
+	<permission name="cms.policy:Add cms" acquire="True">
 		<role name="Manager"/>	
 		
     </permission>

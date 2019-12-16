@@ -11,9 +11,9 @@
    <include package=".browser" />
    
    <genericsetup:importStep
-        name="emc.policy-postInstall"
-        title="emc.policy post_install import step"
-        description="Post install import step from emc.policy"
+        name="cms.policy-postInstall"
+        title="cms.policy post_install import step"
+        description="Post install import step from cms.policy"
         handler=".setuphandlers.post_install">
         <depends name='typeinfo' />
    </genericsetup:importStep>

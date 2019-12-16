@@ -6,7 +6,7 @@ from zope.component import getMultiAdapter
 from Products.CMFCore.interfaces import ISiteRoot
 from cms.policy import _
 
-from emc.theme.interfaces import IThemeSpecific
+from cms.theme.interfaces import IThemeSpecific
 from emc.project.browser.ajax_listing import sysAjaxListingView,ajaxsearch
 # from emc.memberArea.browser.workspace import WorkspaceView
 from emc.kb.contents.kbfolder import Ikbfolder
