@@ -2,18 +2,13 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:plone="http://namespaces.plone.org/plone"    
     i18n_domain="plone">
-
   	
  	<browser:resourceDirectory
   		name="cms.policy"
   		directory="static" />
-
-   <!-- Overview Control Panel Overview -->
-
-<!--   
+  
    <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="index.html"
@@ -26,11 +21,11 @@
    <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="ajax_db_search"
-      class=".homepage.search"
+      class=".homepage.Search"
  	  layer="cms.theme.interfaces.IThemeSpecific"       
       permission="zope.Public"
       />      
-  -->
+
 
 	<!-- manage tools-->      
    <browser:page

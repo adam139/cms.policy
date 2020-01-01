@@ -1,5 +1,4 @@
 #-*- coding: UTF-8 -*-
-# from five import grok
 import json
 from plone.memoize.instance import memoize
 from zope.component import getMultiAdapter
@@ -7,71 +6,66 @@ from Products.CMFCore.interfaces import ISiteRoot
 from cms.policy import _
 
 from cms.theme.interfaces import IThemeSpecific
-from emc.project.browser.ajax_listing import sysAjaxListingView,ajaxsearch
-# from emc.memberArea.browser.workspace import WorkspaceView
-from emc.kb.contents.kbfolder import Ikbfolder
+from cms.db.browser.sysajax_listings import SysAjaxListingView,Ajaxsearch
+from cms.db.contents.wuyunfolder import IWuyunfolder
 
 
-# grok.templatedir('templates')
-
-class FrontpageView(sysAjaxListingView):
-     
-#     grok.context(ISiteRoot)
-#     grok.template('ajax_listings_homepage')
-#     grok.name('index.html')
-#     grok.layer(IThemeSpecific)
-#     grok.require('zope2.View')      
+class FrontpageView(SysAjaxListingView):     
        
-    def getPathQuery(self):
- 
+    @memoize
+    def getPathQuery(self,objid=None,justchildrens=True):
         """返回 知识库目录
         """
         query = {}
-        kb = self.getKBFolder()
+        kb = self.getWuyunfolder()
+        path = "/".join(kb.getPhysicalPath())
+        if justchildrens:
+            pathdic = {'depth':1}
+            pathdic['query'] = path
+            query['path'] = pathdic            
+        elif bool(objid):
+            query2 = {}
+            query2['id'] = objid
+            bn = self.catalog()(query2)
+            if len(bn) >=1:
+                path = bn[0].getPath()
+                query['path'] = path
+            else:
+                query['path'] = path                                             
+        else:
+            query['path'] = path                             
+        return query        
+       
 
-        query['path'] = "/".join(kb.getPhysicalPath())
-        return query         
-        
-# roll table output
-    def getKBFolder(self):
-        
-        brains = self.catalog()({'object_provides':Ikbfolder.__identifier__})
+    def getWuyunfolder(self):        
+        brains = self.catalog()({'object_provides':IWuyunfolder.__identifier__})
         context = brains[0].getObject()
         return context        
         
-class search(ajaxsearch):
+class Search(Ajaxsearch):    
     
-    
-    def render(self):    
-#        self.portal_state = getMultiAdapter((self.context, self.request), name=u"plone_portal_state")
+    def __call__(self):    
         searchview = getMultiAdapter((self.context, self.request),name=u"index.html")        
  # datadic receive front ajax post data       
         datadic = self.request.form
         start = int(datadic['start']) # batch search start position
         datekey = int(datadic['datetype'])  # 对应 最近一周，一月，一年……
-        size = int(datadic['size'])      # batch search size          
-#         securitykey = int(datadic['security'])  #密级属性：公开/内部/机密
-#         tasktypekey = int(datadic['type']) #任务类型属性：分析/设计/实验/仿真/培训 
+        size = int(datadic['size'])      # batch search size 
+
         tag = datadic['tag'].strip()
         sortcolumn = datadic['sortcolumn']
         sortdirection = datadic['sortdirection']
-        keyword = (datadic['searchabletext']).strip()     
+        keyword = (datadic['searchabletext']).strip()
 
         origquery = searchview.getPathQuery()
         origquery['sort_on'] = sortcolumn  
-        origquery['sort_order'] = sortdirection
-                
+        origquery['sort_order'] = sortdirection                
  #模糊搜索       
         if keyword != "":
             origquery['SearchableText'] = '*'+keyword+'*'        
 
-#         if securitykey != 0:
-#             origquery['security_level'] = searchview.getSecurityLevel(securitykey)
         if datekey != 0:
-            origquery['created'] = self.Datecondition(datekey)           
-#         if tasktypekey != 0:
-#             origquery['task_type'] = searchview.getTaskType(tasktypekey)
-
+            origquery['created'] = self.Datecondition(datekey)
         # remove repeat values 
         tag = tag.split(',')
         tag = set(tag)
@@ -89,8 +83,7 @@ class search(ajaxsearch):
         if '0' in tag and len(tag) > 1:
             tag.remove('0')
             rule = {"query":tag,"operator":"and"}
-            origquery['Subject'] = rule
-                      
+            origquery['Subject'] = rule                      
 #totalquery  search all 
         totalquery = origquery.copy()
 #origquery provide  batch search        

@@ -4,7 +4,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="context/main_template/macros/master"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"      
-      i18n:domain="emc.project">        
+      i18n:domain="cms.policy">        
 <head>
       <metal:block fill-slot="top_slot">
         <tal:insert tal:replace="nothing"
@@ -35,6 +35,7 @@
 			<input type="hidden" value="0" id="securityLevelSearch">
 			<input type="hidden" value="0" id="categorySearch">
 			<input type="hidden" value="0" id="tagSearch">
+			<input type="hidden" value="" id="objid">
 			<input type="hidden" value="created" id="solrSortColumn">
 			<input type="hidden" value="reverse" id="solrSortDirection">
 			<ul class="row list-inline" id="dateRangeSearchUl">
@@ -141,7 +142,7 @@
   <metal:js fill-slot="javascript_bottom_slot">
 	<script type="text/javascript"
 		tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-     tal:attributes="src string:${navroot}/++resource++emc.project/ajaxsearch_notagsreminder.js">		
+     tal:attributes="src string:${navroot}/++resource++cms.db/ajaxsearch_notagsreminder.js">		
 	</script>	
 	</metal:js>
 </body>
