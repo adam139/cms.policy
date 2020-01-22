@@ -14,7 +14,17 @@
       2000-<tal:year 
          tal:define="DateTime nocall:modules/DateTime.DateTime;
                      myTime python:DateTime()"
-         tal:content="python:myTime.year()" />由<a href="http://www.315ok.org/">唐岳军</a>持有。</span>
+         tal:content="python:myTime.year()" />由<a href="http://www.315ok.org/">唐岳军</a>持有</span>
+        <span class="pull-right"><a href="#">返回顶部</a></span>
+        <p class="sign">&copy; 2007-<tal:year 
+         tal:define="DateTime nocall:modules/DateTime.DateTime;
+                     myTime python:DateTime()"
+         tal:content="python:myTime.year()" />&middot;中医科学系统<br/>湘ICP备14006519号-1<a href="http://www.beian.miit.gov.cn/">备案查询</a>
+<!--
+<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43030402000275" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                        <img src="http://images.315ok.org/xtcs/images/wangan.png" alt="wang an" style="float:left;margin-right:5px"/>
+                        湘公网安备 43030402000275号</a> -->
+</p>    
     </div>
   </section>
 </html>
