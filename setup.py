@@ -26,13 +26,15 @@ setup(name='cms.policy',
       install_requires=[
           'setuptools',
           'Products.CMFPlone',
-          'collective.monkeypatcher',          
-          'collective.autopermission',          
+          'collective.monkeypatcher',
+          'collective.autopermission',
+          'cms.db',
+          'cms.theme',
           # -*- Extra requirements: -*-
       ],
       extras_require={
     'test': ['plone.app.testing',]
-        },       
+        },
       entry_points="""
       # -*- Entry points: -*-
 
