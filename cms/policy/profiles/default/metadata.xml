@@ -3,6 +3,8 @@
   <version>1000</version>
     <dependencies> 
         <dependency>profile-cms.theme:default</dependency>
-        <dependency>profile-cms.db:default</dependency>                                     
+        <dependency>profile-cms.db:default</dependency>
+        <dependency>profile-collective.z3cform.datagridfield:default</dependency>
+        <dependency>profile-plone.formwidget.autocomplete:default</dependency>
     </dependencies>  
 </metadata>
